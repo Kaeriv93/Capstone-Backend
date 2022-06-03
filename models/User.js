@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     },
     username:{
         type:String,
-        required:[true, 'usernam is required'],
+        required:[true, 'username is required'],
         unique: true
     },
     email:{
@@ -30,6 +30,30 @@ const userSchema = new mongoose.Schema({
     description:{
         type:String,
         default:'Tell us about yourself'
+    },
+
+    birthdate:{
+        type: Date
+    },
+ blog:{
+        type: mongoose.Types.ObjectId,
+        ref:'Blog'
+    },
+    posts:{
+        type: mongoose.Types.ObjectId,
+        ref: 'Posts'
+    },
+    socials:[{
+        type:String,
+        default:['Twitter','Instagram','Linkedin']
+    }],
+    followers:{
+        type: mongoose.Types.ObjectId,
+        ref: 'Followers'
+    },
+    message:{
+        type: mongoose.Types.ObjectId,
+        ref: 'Message'
     }
 },{
     timestamps: true
