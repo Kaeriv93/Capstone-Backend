@@ -36,6 +36,14 @@ app.get('/users', async(req,res)=>{
     }
 })
 
+app.post('/users', async(req,res)=>{
+    try{
+        res.json(await db.User.create(req.body))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
 app.get('/',(req,res)=>{
     res.send('Hello World')
 })
