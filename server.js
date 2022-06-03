@@ -28,6 +28,7 @@ app.use(cors())
 //DB
 const db = require('./models')
 
+//Users
 app.get('/users', async(req,res)=>{
     try{
         res.json(await db.User.find({}))
@@ -44,6 +45,23 @@ app.post('/users', async(req,res)=>{
     }
 })
 
+app.get('/userpage/:id', async(req,res)=>{
+    try{
+        res.json(await db.User.findById(req.params.id))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
+app.put('/userpage/:id', async(req,res)=>{
+    try{
+        res.json(await db.User.findByIdAndUpdate(req.params.id,req.body))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
+//Get Home Route Test
 app.get('/',(req,res)=>{
     res.send('Hello World')
 })
