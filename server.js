@@ -25,7 +25,20 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
 
+//DB
+const db = require('./models')
+
+app.get('/users', async(req,res)=>{
+    try{
+        res.json(await db.User.find({}))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
 app.get('/',(req,res)=>{
     res.send('Hello World')
 })
+
+//Listening Port
 app.listen(PORT, ()=>console.log(`We listening to port ${PORT}`))
