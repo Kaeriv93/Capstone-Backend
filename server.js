@@ -61,6 +61,14 @@ app.put('/userpage/:id', async(req,res)=>{
     }
 })
 
+app.delete('/userpage/:id', async(req,res)=>{
+    try{
+        res.json(await db.User.findByIdAndRemove(req.params.id))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
 //Get Home Route Test
 app.get('/',(req,res)=>{
     res.send('Hello World')
