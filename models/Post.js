@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
-const blogSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
     user:{
         type: mongoose.Types.ObjectId,
         ref:'User'
     },
     content:{
-        type: String,
+        type:String
     },
     date:{
         type: Date
@@ -16,6 +16,6 @@ const blogSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
-const Blog = mongoose.model('Blog', blogSchema)
+const Post = mongoose.model('Post', postSchema)
 
-module.exports = Blog
+module.exports = Post

@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
     },
     posts:{
         type: mongoose.Types.ObjectId,
-        ref: 'Posts'
+        ref: 'Post'
     },
     socials:[{
         type:String,
