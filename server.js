@@ -4,6 +4,7 @@ const express = require('express')
 const { default: mongoose } = require('mongoose')
 const {PORT = 4000, MONGODB_URL} = process.env
 const app = express()
+const controllers = require('./Controllers')
 
 
 //Middleware
@@ -45,13 +46,13 @@ app.post('/users', async(req,res)=>{
     }
 })
 
-app.get('/userpage/:id', async(req,res)=>{
-    try{
-        res.json(await db.User.findById(req.params.id))
-    }catch(error){
-        res.status(400).json(error)
-    }
-})
+// app.get('/userpage/:id', async(req,res)=>{
+//     try{
+//         res.json(await db.User.findById(req.params.id))
+//     }catch(error){
+//         res.status(400).json(error)
+//     }
+// })
 
 app.put('/userpage/:id', async(req,res)=>{
     try{
@@ -68,6 +69,9 @@ app.delete('/userpage/:id', async(req,res)=>{
         res.status(400).json(error)
     }
 })
+
+// Controllers Use
+app.use('/userpage', controllers.blog)
 
 //Get Home Route Test
 app.get('/',(req,res)=>{

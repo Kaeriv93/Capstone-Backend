@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
     birthdate:{
         type: Date
     },
- blog:{
+    blog:{
         type: mongoose.Types.ObjectId,
         ref:'Blog'
     },
