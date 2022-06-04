@@ -46,13 +46,13 @@ app.post('/users', async(req,res)=>{
     }
 })
 
-// app.get('/userpage/:id', async(req,res)=>{
-//     try{
-//         res.json(await db.User.findById(req.params.id))
-//     }catch(error){
-//         res.status(400).json(error)
-//     }
-// })
+app.get('/userpage/:id', async(req,res)=>{
+    try{
+        res.json(await db.User.findById(req.params.id))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
 
 app.put('/userpage/:id', async(req,res)=>{
     try{

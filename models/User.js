@@ -35,14 +35,14 @@ const userSchema = new mongoose.Schema({
     birthdate:{
         type: Date
     },
-    blog:{
+    blog:[{
         type: mongoose.Types.ObjectId,
         ref:'Blog'
-    },
-    posts:{
+    }],
+    posts:[{
         type: mongoose.Types.ObjectId,
         ref: 'Post'
-    },
+    }],
     socials:[{
         type:String,
         default:['Twitter','Instagram','Linkedin']
@@ -51,10 +51,10 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'Followers'
     },
-    message:{
+    message:[{
         type: mongoose.Types.ObjectId,
         ref: 'Message'
-    }
+    }]
 },{
     timestamps: true
 })
