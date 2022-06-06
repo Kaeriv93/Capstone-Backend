@@ -71,7 +71,7 @@ app.delete('/userpage/:id', async(req,res)=>{
 })
 
 // Controllers Use
-app.use('/userpage', controllers.blog)
+app.use('/user', controllers.blog)
 
 //Get Home Route Test
 app.get('/',(req,res)=>{
