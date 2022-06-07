@@ -27,11 +27,6 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
 
-//DB
-const db = require('./models')
-
-//Users
-
 
 // Controllers Use
 // app.use('/user', controllers.blog)
