@@ -49,10 +49,12 @@ const userSchema = new mongoose.Schema({
         default:[],
     },
     city:{
-        type: String
+        type: String,
+        default:""
     },
     from:{
-        type: String
+        type: String,
+        default:""
     },
     followings:{
         type: Array,
