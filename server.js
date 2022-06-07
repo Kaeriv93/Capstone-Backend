@@ -9,7 +9,7 @@ const userRoute = require('./routes/users')
 const authRoutes = require('./routes/AuthRoutes')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const User = require('./models/User')
+
 
 
 //Middleware
@@ -39,7 +39,7 @@ app.use(
   );
 
 // Controllers Use
-// app.use('/user', controllers.blog)
+app.use('/user', controllers.blog)
 app.use('/', userRoute)
 app.use('/', authRoutes)
 
@@ -81,47 +81,6 @@ app.get('/register', (req,res)=>{
 app.get('/login', (req,res)=>{
     res.send('This is the login page')
 })
-
-//Users
-// app.get('/users', async(req,res)=>{
-//     try{
-//         res.json(await User.find({}))
-//     }catch(error){
-//         res.status(400).json(error)
-//     }
-// })
-
-// app.post('/users', async(req,res)=>{
-//     try{
-//         res.json(await User.create(req.body))
-//     }catch(error){
-//         res.status(400).json(error)
-//     }
-// })
-
-// app.get('/user/:id', async(req,res)=>{
-//     try{
-//         res.json(await User.findById(req.params.id))
-//     }catch(error){
-//         res.status(400).json(error)
-//     }
-// })
-
-// app.put('/user/:id', async(req,res)=>{
-//     try{
-//         res.json(await User.findByIdAndUpdate(req.params.id,req.body))
-//     }catch(error){
-//         res.status(400).json(error)
-//     }
-// })
-
-// app.delete('/user/:id', async(req,res)=>{
-//     try{
-//         res.json(await User.findByIdAndRemove(req.params.id))
-//     }catch(error){
-//         res.status(400).json(error)
-//     }
-// })
 
 
 //Listening Port
