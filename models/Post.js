@@ -12,7 +12,11 @@ const postSchema = new mongoose.Schema({
         type: Date
     },
     likes:{
-        type: Number
+        type: Array,
+        default:[],
+    },
+    img:{
+        type: String
     }
 },{timestamps:true})
 

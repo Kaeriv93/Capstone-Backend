@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     firstName:{
@@ -27,6 +28,11 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:'https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg'
     },
+    coverPicture:{
+        type:String,
+        default:""
+    },
+
     description:{
         type:String,
         default:'Tell us about yourself'
@@ -35,29 +41,51 @@ const userSchema = new mongoose.Schema({
     birthdate:{
         type: Date
     },
- blog:{
+    blog:[{
         type: mongoose.Types.ObjectId,
         ref:'Blog'
-    },
-    posts:{
-        type: mongoose.Types.ObjectId,
-        ref: 'Post'
-    },
-    socials:[{
-        type:String,
-        default:['Twitter','Instagram','Linkedin']
     }],
     followers:{
-        type: mongoose.Types.ObjectId,
-        ref: 'Followers'
+        type:Array,
+        default:[],
     },
-    message:{
+    city:{
+        type: String,
+        default:""
+    },
+    from:{
+        type: String,
+        default:""
+    },
+    followings:{
+        type: Array,
+        default: [],
+    },
+    message:[{
         type: mongoose.Types.ObjectId,
         ref: 'Message'
-    }
+    }]
 },{
     timestamps: true
 })
+
+userSchema.pre('save', async function(next){
+    const salt = await bcrypt.genSalt()
+    this.password = await bcrypt.hash(this.password, salt)
+    next()
+})
+
+userSchema.statics.login = async function(email,password){
+    const user = await this.findOne({email})
+    if(user){
+        const auth = await bcrypt.compare(password,user.password)
+        if(auth){
+            return user
+        }
+        throw Error("incorrect password")
+    }
+    throw Error('incorrect Email')
+}
 
 const User = mongoose.model('User', userSchema)
 
