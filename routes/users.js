@@ -4,7 +4,7 @@ const router = require('express').Router()
 
 router.get('/users', async(req,res)=>{
     try{
-        res.json(await User.find({}))
+        res.json(await User.find({})).populate('blog')
     }catch(error){
         res.status(400).json(error)
     }
@@ -12,7 +12,7 @@ router.get('/users', async(req,res)=>{
 
 router.post('/users', async(req,res)=>{
     try{
-        res.json(await User.create(req.body))
+        res.json(await User.create(req.body)).populate('blog')
     }catch(error){
         res.status(400).json(error)
     }
@@ -20,7 +20,7 @@ router.post('/users', async(req,res)=>{
 
 router.get('/user/:id', async(req,res)=>{
     try{
-        res.json(await User.findById(req.params.id))
+        res.json(await User.findById(req.params.id)).populate('blog')
     }catch(error){
         res.status(400).json(error)
     }
@@ -28,7 +28,7 @@ router.get('/user/:id', async(req,res)=>{
 
 router.put('/user/:id', async(req,res)=>{
     try{
-        res.json(await User.findByIdAndUpdate(req.params.id,req.body))
+        res.json(await User.findByIdAndUpdate(req.params.id,req.body)).populate('blog')
     }catch(error){
         res.status(400).json(error)
     }
@@ -36,7 +36,7 @@ router.put('/user/:id', async(req,res)=>{
 
 router.delete('/user/:id', async(req,res)=>{
     try{
-        res.json(await User.findByIdAndRemove(req.params.id))
+        res.json(await User.findByIdAndRemove(req.params.id)).populate('blog')
     }catch(error){
         res.status(400).json(error)
     }

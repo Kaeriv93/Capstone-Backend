@@ -2,17 +2,15 @@ const router = require('express').Router()
 
 const db = require('../models')
 
-// router.get('/:id', (req,res)=>{
-//     db.User
-//     .findOne({_id:req.params.id})
-//     .populate({
-//         path:'blog'
-//     })
-//     .then(user=>{
-//         res.json(user.blog)
-//     })
-//     .catch(err => res.status(400).json(err))
-// })
+router.get('/:id', (req,res)=>{
+    db.User
+    .findOne({_id:req.params.id})
+    .populate('blog')
+    .then(user=>{
+        res.json(user)
+    })
+    .catch(err => res.status(400).json(err))
+})
 
 router.get('/:id/blog', async(req,res)=>{
     try{
@@ -33,7 +31,7 @@ router.post('/:id', async(req,res)=>{
         console.log(error)
         console.log('Blog was not posted')
         req.error = error
-    }
+    }r
 })
 
 
