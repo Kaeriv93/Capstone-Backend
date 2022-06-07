@@ -1,12 +1,14 @@
 // Dependencies
 require('dotenv').config()
 const express = require('express')
-const { default: mongoose } = require('mongoose')
+const mongoose = require('mongoose')
 const {PORT = 4000, MONGODB_URL} = process.env
 const app = express()
 const controllers = require('./Controllers')
 const userRoute = require('./routes/users')
 const authRoutes = require('./routes/AuthRoutes')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 
 
 //Middleware
@@ -27,18 +29,54 @@ mongoose.connect(MONGODB_URL,{
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors())
-
+app.use(cors({
+    credentials: true,
+    origin:'http://localhost:3000'
+    
+}))
 
 // Controllers Use
 app.use('/user', controllers.blog)
 app.use('/', userRoute)
 app.use('/', authRoutes)
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
+app.set("trust proxy", 1);
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET || 'Super Secret',
+        resave: true,
+        saveUninitialized: false,
+        cookie: {
+            sameSite: process.env.NODE_ENV === 'none',
+            secure: process.env.NODE_ENV === "production", 
+            
+            
+            
+        }
+    })
+    );
 
 //Get Home Route Test
 app.get('/',(req,res)=>{
     res.send('Hello World')
+})
+
+app.get('/register', (req,res)=>{
+    res.send('This is the register')
+})
+
+app.get('/login', (req,res)=>{
+    res.send('This is the login page')
 })
 
 

@@ -43,6 +43,7 @@ module.exports.register = async (req,res,next) =>{ try{
     console.log(err)
     const errors = handleErrors(err)
     res.json({errors, created:false})
+    next()
 }}
 
 module.exports.login = async (req,res) =>{
