@@ -27,6 +27,11 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:'https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg'
     },
+    coverPicture:{
+        type:String,
+        default:""
+    },
+
     description:{
         type:String,
         default:'Tell us about yourself'
@@ -39,17 +44,19 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref:'Blog'
     }],
-    posts:[{
-        type: mongoose.Types.ObjectId,
-        ref: 'Post'
-    }],
-    socials:[{
-        type:String,
-        default:['Twitter','Instagram','Linkedin']
-    }],
     followers:{
-        type: mongoose.Types.ObjectId,
-        ref: 'Followers'
+        type:Array,
+        default:[],
+    },
+    city:{
+        type: String
+    },
+    from:{
+        type: String
+    },
+    followings:{
+        type: Array,
+        default: [],
     },
     message:[{
         type: mongoose.Types.ObjectId,
