@@ -20,6 +20,7 @@ router.get('/:id/blog', async(req,res)=>{
     }
 })
 
+
 router.post('/:id', async(req,res)=>{
     try{
         const user = await db.User.findById(req.params.id).populate('blog')
@@ -31,9 +32,24 @@ router.post('/:id', async(req,res)=>{
         console.log(error)
         console.log('Blog was not posted')
         req.error = error
-    }r
+    }
 })
 
+router.put('/:id/blog/:id', async(req,res)=>{
+    try{
+        res.json(await db.Blog.findByIdAndUpdate(req.params.id,req.body))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
+router.delete('/:id/blog/:id', async(req,res)=>{
+    try{
+        res.json(await db.Blog.findByIdAndRemove(req.params.id))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
 
 
 module.exports = router
