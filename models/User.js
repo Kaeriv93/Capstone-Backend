@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
     },
     coverPicture:{
         type:String,
-        default:""
+        default:"https://i.imgflip.com/1gqvcu.jpg"
     },
 
     description:{
