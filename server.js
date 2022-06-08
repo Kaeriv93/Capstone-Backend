@@ -4,11 +4,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const {PORT = 4000, MONGODB_URL} = process.env
 const app = express()
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 const controllers = require('./Controllers')
 const userRoute = require('./routes/users')
 const authRoutes = require('./routes/AuthRoutes')
-const cookieParser = require('cookie-parser')
-const session = require('express-session')
 
 
 
@@ -42,6 +42,7 @@ app.use(
 app.use('/user', controllers.blog)
 app.use('/', userRoute)
 app.use('/', authRoutes)
+app.use('/', controllers.post)
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");

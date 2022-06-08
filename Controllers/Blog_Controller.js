@@ -2,17 +2,15 @@ const router = require('express').Router()
 
 const db = require('../models')
 
-// router.get('/:id', (req,res)=>{
-//     db.User
-//     .findOne({_id:req.params.id})
-//     .populate({
-//         path:'blog'
-//     })
-//     .then(user=>{
-//         res.json(user.blog)
-//     })
-//     .catch(err => res.status(400).json(err))
-// })
+router.get('/:id', (req,res)=>{
+    db.User
+    .findOne({_id:req.params.id})
+    .populate('blog')
+    .then(user=>{
+        res.json(user)
+    })
+    .catch(err => res.status(400).json(err))
+})
 
 router.get('/:id/blog', async(req,res)=>{
     try{
@@ -21,6 +19,7 @@ router.get('/:id/blog', async(req,res)=>{
         res.status(400).json(error)
     }
 })
+
 
 router.post('/:id', async(req,res)=>{
     try{
@@ -36,6 +35,21 @@ router.post('/:id', async(req,res)=>{
     }
 })
 
+router.put('/:id/blog/:id', async(req,res)=>{
+    try{
+        res.json(await db.Blog.findByIdAndUpdate(req.params.id,req.body))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
+router.delete('/:id/blog/:id', async(req,res)=>{
+    try{
+        res.json(await db.Blog.findByIdAndRemove(req.params.id))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
 
 
 module.exports = router
