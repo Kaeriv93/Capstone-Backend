@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
-    // user:{
-    //     type: mongoose.Types.ObjectId,
-    //     ref:'User'
-    // },
+    userId:{
+        type: String,
+        required: true
+    },
     content:{
         type:String
     },
@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema({
         default:[],
     },
     img:{
-        type: String
+        type: String,
     }
 },{timestamps:true})
 
