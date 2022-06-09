@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
     },
     coverPicture:{
         type:String,
-        default:""
+        default:"https://ga-shop-production-herokuapp-com.global.ssl.fastly.net/assets/images/logo_1200_by_627_1QIVL.jpg"
     },
 
     description:{
@@ -65,6 +65,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'Message'
     }]
+    
 },{
     timestamps: true
 })
