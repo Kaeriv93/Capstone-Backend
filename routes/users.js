@@ -28,7 +28,7 @@ router.get('/user/:id', async(req,res)=>{
 
 router.put('/user/:id', async(req,res)=>{
     try{
-        res.json(await User.findByIdAndUpdate(req.params.id,req.body)).populate('blog')
+        res.json(await User.findByIdAndUpdate(req.params.id,req.body))
     }catch(error){
         res.status(400).json(error)
     }
