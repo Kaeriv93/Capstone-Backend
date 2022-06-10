@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const postSchema = new mongoose.Schema({
     userId:{
         type: String,
+        default:'629f8d7dd3bdfaf56f4259c0',
         required: true
     },
     content:{
