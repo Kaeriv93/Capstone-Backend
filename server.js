@@ -32,7 +32,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(
     cors({
-      origin: ["http://localhost:3000"],
+        origin: [process.env.ORIGIN,'http://localhost:3000'],
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     })
@@ -45,7 +45,7 @@ app.use('/', authRoutes)
 app.use('/', controllers.post)
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELTE", );
     res.header(
       "Access-Control-Allow-Headers",
