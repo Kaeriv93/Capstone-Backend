@@ -43,13 +43,10 @@ app.use('/', userRoute)
 app.use('/', authRoutes)
 app.use('/', controllers.post)
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authortization');
+    res.setHeader('Acces-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
     next();
   });
 
