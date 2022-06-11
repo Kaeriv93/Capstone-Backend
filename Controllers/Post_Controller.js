@@ -32,17 +32,10 @@ router.post('/post', async(req,res)=>{
 
 router.put('/post/:id', async(req,res)=>{
     try{
-        const post = await db.Post.findById(req.params.id)
-        if(post.userId === req.body.userId){
-            await post.updateOne({$set:req.body})
-            res.status(200).json("the post has been updated")
-        }else{
-            res.status(403).json('You can only update your own post')
-        }
-    }catch(err){
-        res.status(400).json(err)
+        res.json(await db.Post.findByIdAndUpdate(req.params.id,req.body))
+    }catch(error){
+        res.status(400).json(error)
     }
-        
 })
 
 router.put('/post/:id/like', async (req,res)=>{
