@@ -35,8 +35,10 @@ module.exports.register = async (req,res,next) =>{ try{
     const token = createToken(user._id)
     res.cookie('jwt', token,{
         withCredentials:true,
-        httpOnly:false,
+        httpOnly:true,
         maxAge: maxAge * 1000,
+        sameSite : "none",
+        secure: true,
     })
     res.status(201).json({user:user._id, created:true})
 }catch(err){
@@ -53,8 +55,10 @@ module.exports.login = async (req,res) =>{
     const token = createToken(user._id)
     res.cookie('jwt', token,{
         withCredentials:true,
-        httpOnly:false,
+        httpOnly:true,
         maxAge: maxAge * 1000,
+        sameSite : "none",
+        secure: true,
     })
     res.status(200).json({user:user._id, created:true})
 }catch(err){
