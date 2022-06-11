@@ -4,7 +4,7 @@ const router = require('express').Router()
 
 router.get('/users', async(req,res)=>{
     try{
-        res.json(await User.find({})).populate('blog')
+        res.json(await User.find({}))
     }catch(error){
         res.status(400).json(error)
     }
@@ -12,7 +12,7 @@ router.get('/users', async(req,res)=>{
 
 router.post('/users', async(req,res)=>{
     try{
-        res.json(await User.create(req.body)).populate('blog')
+        res.json(await User.create(req.body))
     }catch(error){
         res.status(400).json(error)
     }
@@ -20,7 +20,7 @@ router.post('/users', async(req,res)=>{
 
 router.get('/user/:id', async(req,res)=>{
     try{
-        res.json(await User.findById(req.params.id)).populate('blog')
+        res.json(await User.findById(req.params.id))
     }catch(error){
         res.status(400).json(error)
     }
