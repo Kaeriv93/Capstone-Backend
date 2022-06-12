@@ -65,6 +65,8 @@ app.use(
   app.use('/', userRoute)
   app.use('/', authRoutes)
   app.use('/', controllers.post)
+
+  
 //Get Home Route Test
 app.get('/',(req,res)=>{
     res.send('Hello World')
