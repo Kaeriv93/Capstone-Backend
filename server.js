@@ -30,7 +30,7 @@ mongoose.connect(MONGODB_URL,{
 //Using Middleware
 app.use(morgan('dev'))
 app.use(express.json())
-app.use(cookieParser(cookieOptions))
+app.use(cookieParser())
 app.use(
     cors({
       origin: [process.env.ORIGIN, 'http://localhost:3000'],
@@ -38,12 +38,7 @@ app.use(
     })
   );
 
-  const cookieOptions = {
-    httpOnly: false,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
-    }
-    
+
     
 
 // Controllers Use
