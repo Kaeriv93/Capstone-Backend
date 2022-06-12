@@ -39,7 +39,7 @@ app.use(
   );
 
   const cookieOptions = {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: 'none'
     }
@@ -60,7 +60,17 @@ app.use((req, res, next) => {
   });
 
 app.set("trust proxy", 1);
-app.use(  session({    secret: process.env.SESSION_SECRET || 'secret key',    resave: true,    saveUninitialized: false,    cookie: {      sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',     secure: process.env.NODE_ENV === "production",    }  }));
+app.use(
+    session({
+      secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+      resave: true,
+      saveUninitialized: false,
+      cookie: {
+        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+        secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
+      }
+    })
+ );
 
 //Get Home Route Test
 app.get('/',(req,res)=>{
