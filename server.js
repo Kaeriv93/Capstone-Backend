@@ -30,13 +30,21 @@ mongoose.connect(MONGODB_URL,{
 //Using Middleware
 app.use(morgan('dev'))
 app.use(express.json())
-app.use(cookieParser())
+app.use(cookieParser(cookieOptions))
 app.use(
     cors({
       origin: [process.env.ORIGIN, 'http://localhost:3000'],
       credentials: true,
     })
   );
+
+  const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none'
+    }
+    
+    
 
 // Controllers Use
 app.use('/user', controllers.blog)
