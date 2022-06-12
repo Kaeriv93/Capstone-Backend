@@ -41,7 +41,11 @@ app.use(
   const cookieOptions = {
     httpOnly: false,
     secure: true,
-    sameSite: 'none'
+    sameSite: 'none',
+    resave: true,
+    saveUninitialized: false,
+    secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+    name:"jwt_session"
     }
     
     
