@@ -39,7 +39,7 @@ app.use(
   );
 
   const cookieOptions = {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: 'none'
     }
