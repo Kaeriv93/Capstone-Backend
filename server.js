@@ -52,21 +52,7 @@ app.use((req, res, next) => {
   });
 
 app.set("trust proxy", 1);
-// app.use(session({
-//     key: 'session_cookie_user_auth',
-//     secret: 'mooncore',
-//     store: sessionStore,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//         sameSite: 'none',
-//         secure: true,
-//         httpOnly: true,
-//         maxAge: 1000 * 60 * 60 * 60
-//     }
-// }));
-
-
+app.use(  session({    secret: process.env.SESSION_SECRET || 'secret key',    resave: true,    saveUninitialized: false,    cookie: {      sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',     secure: process.env.NODE_ENV === "production",    }  }));
 
 //Get Home Route Test
 app.get('/',(req,res)=>{
