@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const {PORT = 4000, MONGODB_URL} = process.env
 const app = express()
 const cookieParser = require('cookie-parser')
+const cookieSession = require("cookie-session")
 const session = require('express-session')
 const controllers = require('./Controllers')
 const userRoute = require('./routes/users')
@@ -52,20 +53,15 @@ app.use((req, res, next) => {
 
 app.set("trust proxy", 1);
 app.use(
-    session({
-        secret: process.env.SESSION_SECRET || 'Super Secret',
-        resave: true,
-        saveUninitialized: false,
-        cookie: {
-            sameSite: process.env.NODE_ENV === 'none',
-            secure: process.env.NODE_ENV === "production", 
-            
-            
-            
-        }
+    cookieSession({
+      name: "__session",
+      keys: ["key1"],
+        maxAge: 24 * 60 * 60 * 100,
+        secure: true,
+        httpOnly: true,
+        sameSite: 'none'
     })
-    );
-
+);
 //Get Home Route Test
 app.get('/',(req,res)=>{
     res.send('Hello World')
