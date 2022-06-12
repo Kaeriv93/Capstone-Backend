@@ -30,7 +30,7 @@ mongoose.connect(MONGODB_URL,{
 //Using Middleware
 app.use(morgan('dev'))
 app.use(express.json())
-app.use(cookieParser(cookieOptions))
+app.use(cookieParser())
 app.use(
     cors({
       origin: [process.env.ORIGIN, 'http://localhost:3000'],
@@ -38,44 +38,33 @@ app.use(
     })
   );
 
-  const cookieOptions = {
-    httpOnly: false,
-    secure: true,
-    sameSite: 'none',
-    resave: true,
-    saveUninitialized: false,
-    secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
-    name:"jwt_session"
-    }
     
-    
-
 // Controllers Use
-app.use('/user', controllers.blog)
-app.use('/', userRoute)
-app.use('/', authRoutes)
-app.use('/', controllers.post)
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authortization');
-    res.setHeader('Acces-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-    next();
-  });
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authortization');
+  res.setHeader('Acces-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+  next();
+});
 
 app.set("trust proxy", 1);
 app.use(
-    session({
-      secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
-      resave: true,
-      saveUninitialized: false,
-      cookie: {
-        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
-        secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
-      }
-    })
- );
-
+  session({
+    secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      sameSite: "none",
+      secure: true,
+    }
+  })
+  );
+  
+  app.use('/user', controllers.blog)
+  app.use('/', userRoute)
+  app.use('/', authRoutes)
+  app.use('/', controllers.post)
 //Get Home Route Test
 app.get('/',(req,res)=>{
     res.send('Hello World')
