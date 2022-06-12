@@ -38,7 +38,6 @@ module.exports.register = async (req,res,next) =>{ try{
         httpOnly:true,
         maxAge: maxAge * 1000,
         sameSite : "none",
-        domain:'http://localhost:3000/',
         secure: true,
     })
     res.status(201).json({user:user._id, created:true})
@@ -58,7 +57,6 @@ module.exports.login = async (req,res) =>{
         withCredentials:true,
         httpOnly:true,
         maxAge: maxAge * 1000,
-        domain:'http://localhost:3000/',
         sameSite : "none",
         secure: true,
     })
