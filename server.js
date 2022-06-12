@@ -52,16 +52,18 @@ app.use((req, res, next) => {
   });
 
 app.set("trust proxy", 1);
-app.use(
-    cookieSession({
-      name: "__session",
-      keys: ["key1"],
-        maxAge: 24 * 60 * 60 * 100,
-        secure: true,
-        httpOnly: true,
-        sameSite: 'none'
-    })
-);
+app.use(session({
+    key: 'session_cookie_user_auth',
+    secret: 'mooncore',
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        SameSite: 'none',
+        maxAge: 1000 * 60 * 60 * 60
+    }
+}));
+
 //Get Home Route Test
 app.get('/',(req,res)=>{
     res.send('Hello World')
