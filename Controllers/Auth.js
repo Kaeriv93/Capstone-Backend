@@ -39,6 +39,10 @@ module.exports.register = async (req,res,next) =>{ try{
         maxAge: maxAge * 1000,
         sameSite : "none",
         secure: true,
+        resave: true,
+        saveUninitialized: false,
+        secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+        name:"jwt_session"
     })
     res.status(201).json({user:user._id, created:true})
 }catch(err){
@@ -59,6 +63,10 @@ module.exports.login = async (req,res) =>{
         maxAge: maxAge * 1000,
         sameSite : "none",
         secure: true,
+        resave: true,
+        saveUninitialized: false,
+        secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+        name:"jwt_session"
     })
     res.status(200).json({user:user._id, created:true})
 }catch(err){
