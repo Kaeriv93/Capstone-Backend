@@ -35,7 +35,7 @@ module.exports.register = async (req,res,next) =>{ try{
     const token = createToken(user._id)
     res.cookie('jwt', token,{
         withCredentials:true,
-        httpOnly:false,
+        httpOnly: true,
         maxAge: maxAge * 1000,
         sameSite : "none",
         secure: true,
@@ -55,7 +55,7 @@ module.exports.login = async (req,res) =>{
     const token = createToken(user._id)
     res.cookie('jwt', token,{
         withCredentials:true,
-        httpOnly:false,
+        httpOnly:true,
         maxAge: maxAge * 1000,
         sameSite : "none",
         secure: true,
